@@ -30,4 +30,19 @@ public class JwtService {
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
+
+    public boolean isTokenValid(String token, UserDetails userDetails) {
+        final String username = extraUsername(token);
+        return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
+    }
+    private boolean isTokenExpired(String token) {
+        return extraExpiration(token).before(new Date());
+    }
+
+    private Date extraExpiration(String token) {
+        return extractClaim(token, Claims::getExpiration);
+    }
+
+
+
 }

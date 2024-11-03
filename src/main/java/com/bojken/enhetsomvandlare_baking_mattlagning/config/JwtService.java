@@ -43,6 +43,19 @@ public class JwtService {
         return extractClaim(token, Claims::getExpiration);
     }
 
+    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = extraAllClaims(token);
+        return claimsResolver.apply(claims);
+    }
+
+    private Claims extraAllClaims(String token) {
+        return Jwts
+                .parselBuilder()
+                .setSigningKey(getSignInKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+    }
 
 
 }

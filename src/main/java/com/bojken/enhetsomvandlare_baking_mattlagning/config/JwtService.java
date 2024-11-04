@@ -3,6 +3,7 @@ package com.bojken.enhetsomvandlare_baking_mattlagning.config;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -57,5 +58,9 @@ public class JwtService {
                 .getBody();
     }
 
+    private Key getSignInKey() {
+        byte [] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+        return Keys.hmacShaKeyFor(keyBytes);
+    }
 
 }

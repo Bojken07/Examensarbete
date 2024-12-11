@@ -16,37 +16,36 @@ import org.springframework.web.cors.CorsConfiguration;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private  final JwtAuthenticationFilter jwtAuthFilter;
+    private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
-}
 
-@Bean
-public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-    httpSecurity
-            .csrf()
-            .disable()
-            .authorizeHttpRequests()
-            .requestMatchers("/api/v1/auth/**")
-            .permitAll()
-            .requestMatchers("/api/v1/users/**", "*").hasAuthority("USER")
-            .anyRequest()
-            .authenticated()
-            .and()
-            .sessionManagement()
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and()
-            .authenticationProvider(authenticationProvider)
-            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity
+                .csrf()
+                .disable()
+                .authorizeHttpRequests()
+                .requestMatchers("/api/v1/auth/**")
+                .permitAll()
+                .requestMatchers("/api/v1/users/**", "*").hasAuthority("USER")
+                .anyRequest()
+                .authenticated()
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authenticationProvider(authenticationProvider)
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
-    httpSecurity.cors().configurationSource(request -> {
-        CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
-        corsConfiguration.addAllowedMethod("POST");
-        corsConfiguration.addAllowedMethod("GET");
-        corsConfiguration.addAllowedMethod("PUT");
-        corsConfiguration.addAllowedMethod("DELETE");
-        return corsConfiguration;
-    });
+        httpSecurity.cors().configurationSource(request -> {
+            CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
+            corsConfiguration.addAllowedMethod("POST");
+            corsConfiguration.addAllowedMethod("GET");
+            corsConfiguration.addAllowedMethod("PUT");
+            corsConfiguration.addAllowedMethod("DELETE");
+            return corsConfiguration;
+        });
 
-    return httpSecurity.build();
- }
+        return httpSecurity.build();
+    }
 }

@@ -48,4 +48,13 @@ public class UnitService {
         }
     }
 
+    public ResponseEntity deleteUnit(Long id) {
+        if(unitRepository.existsById(id)){
+            unitRepository.deleteById(id);
+        }
+        else{
+            throw new RuntimeException("Unit with id " + id + " does not exist");
+        }
+        return null;
+    }
 }

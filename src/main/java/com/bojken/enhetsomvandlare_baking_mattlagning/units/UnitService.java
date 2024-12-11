@@ -28,4 +28,13 @@ public class UnitService {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    public ResponseEntity<Unit> create(Unit unit) {
+        Optional<Unit> unitOptional = unitRepository.existsByName(unit.getUnitName());
+        if (unitOptional.isPresent()){
+            return  new ResponseEntity("Unit already exist", HttpStatus.BAD_REQUEST);
+        }
+        unitRepository.save(unit);
+        return new ResponseEntity("insert ok", HttpStatus.OK);
+    }
 }

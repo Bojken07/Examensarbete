@@ -1,5 +1,6 @@
 package com.bojken.enhetsomvandlare_baking_mattlagning.users;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +10,11 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
+
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @DeleteMapping("/delete_user/{id}")
     private void deleteUserById(@PathVariable("id") long id) {

@@ -37,4 +37,15 @@ public class UnitService {
         unitRepository.save(unit);
         return new ResponseEntity("insert ok", HttpStatus.OK);
     }
+
+    public ResponseEntity<Unit> getUnitById(Long id) {
+        try {
+            Unit unit =  unitRepository.findById(id).get();
+            return new ResponseEntity<>(unit, HttpStatus.OK);
+
+        }catch (Exception e){
+            return new ResponseEntity("Error code" + e , HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }

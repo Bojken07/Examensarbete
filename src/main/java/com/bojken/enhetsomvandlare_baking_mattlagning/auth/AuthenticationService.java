@@ -1,6 +1,7 @@
 package com.bojken.enhetsomvandlare_baking_mattlagning.auth;
 
 import com.bojken.enhetsomvandlare_baking_mattlagning.config.JwtService;
+import com.bojken.enhetsomvandlare_baking_mattlagning.users.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

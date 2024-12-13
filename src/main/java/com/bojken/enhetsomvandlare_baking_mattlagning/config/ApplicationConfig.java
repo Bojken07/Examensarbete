@@ -1,5 +1,6 @@
 package com.bojken.enhetsomvandlare_baking_mattlagning.config;
 
+import com.bojken.enhetsomvandlare_baking_mattlagning.users.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

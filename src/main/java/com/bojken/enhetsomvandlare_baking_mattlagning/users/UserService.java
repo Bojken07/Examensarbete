@@ -4,8 +4,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import javax.management.relation.Role;
-
 @Service
 public class UserService {
 

@@ -15,7 +15,7 @@ public class UnitService {
     private UnitRepository unitRepository;
 
     @Autowired
-    public UnitService(unitRepository unitRepository) {
+    public UnitService(UnitRepository unitRepository) {
         this.unitRepository = unitRepository;
     }
     public ResponseEntity<List<Unit>> getAllUnits() {

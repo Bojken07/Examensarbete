@@ -29,4 +29,9 @@ public class UnitController {
     public ResponseEntity<Unit> createUnit(@RequestBody Unit unit){
         return unitService.create(unit);
     }
+
+    @DeleteMapping("/deleteUnit/{id}")
+    public void deleteUnit(@PathVariable("id") Long id){
+        unitService.deleteUnit(id);
+    }
 }
